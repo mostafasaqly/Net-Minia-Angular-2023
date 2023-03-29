@@ -1,16 +1,13 @@
- <!-- interpolation -->
- <!-- <div>
-  <h1>Ecommerce Project for .net track minia</h1>
-  <h3>First H3 </h3>
-  <p>paragraph for testing</p>
 
-  <h4>for page title : {{pageTitle}} </h4>
-  <h3>{{printMyName("Asmaa")}}</h3>
-</div> -->
+<nav class="navbar navbar-expand navbar-light bg-light">
+  <a  class="navbar-brand"> {{pageTitle}}</a>
+  <ul class="nav nav-pills">
+    <li> <a class="nav-link" routerLink="/home" >Home</a> </li>
+    <li> <a class="nav-link" routerLink="/products" >Products</a> </li>
+  </ul>
+</nav>
 
 
-<div class="container-fluid">
-  <app-products></app-products>
+<div class="container">
+  <router-outlet></router-outlet>
 </div>
-
-

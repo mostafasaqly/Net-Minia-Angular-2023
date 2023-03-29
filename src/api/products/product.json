@@ -1,0 +1,52 @@
+[
+  {
+    "productID": 1,
+    "productName": "mobile",
+    "productCode": "343-yt",
+    "releaseDate": "March 27 2023",
+    "startRating": 4.1,
+    "price": 7000,
+    "description": "Product 1 Description",
+    "image": "https://picsum.photos/100/100"
+  },
+  {
+    "productID": 2,
+    "productName": "laptop",
+    "productCode": "79-sw",
+    "releaseDate": "March 28 2023",
+    "startRating": 3,
+    "price": 30000,
+    "description": "Product 2 Description",
+    "image": "https://picsum.photos/100/100"
+  },
+  {
+    "productID": 3,
+    "productName": "tablet",
+    "productCode": "67-rt",
+    "releaseDate": "March 26 2023",
+    "startRating": 2.2,
+    "price": 4000,
+    "description": "Product 3 Description",
+    "image": "https://picsum.photos/100/100"
+  },
+  {
+    "productID": 4,
+    "productName": "tv",
+    "productCode": "78-qt",
+    "releaseDate": "March 21 2023",
+    "startRating": 5,
+    "price": 2000,
+    "description": "Product 4 Description",
+    "image": "https://picsum.photos/100/100"
+  },
+  {
+    "productID": 5,
+    "productName": "ipad",
+    "productCode": "34-pt",
+    "releaseDate": "March 26 2023",
+    "startRating": 4,
+    "price": 3600,
+    "description": "Product 5 Description",
+    "image": "https://picsum.photos/100/100"
+  }
+]

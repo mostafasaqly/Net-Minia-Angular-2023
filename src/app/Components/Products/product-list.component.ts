@@ -1,29 +1,44 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Subscription } from "rxjs";
 import { IProduct } from "src/app/Models/IProduct";
+import { ProductService } from "src/app/Services/product.service";
 
 @Component({
   selector: 'app-products',
   templateUrl: './product-list.component.html',
-  styleUrls: ['./product-list.component.css']
+  styleUrls: ['./product-list.component.css'],
+
 })
 
 
-export class ProductListComponent implements OnInit {
+export class ProductListComponent implements OnInit, OnDestroy {
   pageTitle: string = "Product List";
   imgWidth : number = 50;
   imgMargin : number = 3;
   showImage : boolean = false;
   filterProducts : IProduct[] = [];
   colorDirectiveBoolean : boolean = false;
+  products: IProduct[] = [];
+  errorMeassage :string ='';
+  sub!: Subscription; // ? save navigation , ! not null assertion operator
 
 
-
-  constructor()
+  constructor(private productService : ProductService)
   {
     this.listFilter = '';
   }
+
   ngOnInit(): void {
     console.log("on init");
+
+    this.sub= this.productService.getProducts().subscribe({
+      next : products=> {
+        this.products = products;
+        this.filterProducts = this.products;
+      },
+      error: err => this.errorMeassage = err
+    });
+
 
   }
 
@@ -46,59 +61,8 @@ export class ProductListComponent implements OnInit {
     product.productName.includes(filterBy)
     );
   }
-  products: IProduct[] =
-    [
-      {
-        productID: 1,
-        productName: "mobile",
-        productCode: "343-yt",
-        releaseDate: "March 27 2023",
-        startRating: 4.1,
-        price: 7000,
-        description: "Product 1 Description",
-        image: "https://picsum.photos/100/100",
-      },
-      {
-        productID: 2,
-        productName: "laptop",
-        productCode: "79-sw",
-        releaseDate: "March 28 2023",
-        startRating: 3,
-        price: 30000,
-        description: "Product 2 Description",
-        image: "https://picsum.photos/100/100",
-      },
-      {
-        productID: 3,
-        productName: "tablet",
-        productCode: "67-rt",
-        releaseDate: "March 26 2023",
-        startRating: 2.2,
-        price: 4000,
-        description: "Product 3 Description",
-        image: "https://picsum.photos/100/100",
-      },
-      {
-        productID: 4,
-        productName: "tv",
-        productCode: "78-qt",
-        releaseDate: "March 21 2023",
-        startRating: 5,
-        price: 2000,
-        description: "Product 4 Description",
-        image: "https://picsum.photos/100/100",
-      },
-      {
-        productID: 5,
-        productName: "ipad",
-        productCode: "34-pt",
-        releaseDate: "March 26 2023",
-        startRating: 4,
-        price: 3600,
-        description: "Product 5 Description",
-        image: "https://picsum.photos/100/100",
-      }
-    ];
+
+
 
     toggleImage()
     {
@@ -110,5 +74,14 @@ export class ProductListComponent implements OnInit {
     onKeyDown(t : any)
     {
       alert("shift + t pressed");
+    }
+
+    onRatingClicked(message : string):void{
+      this.pageTitle = 'product list '+ message;
+    }
+
+
+    ngOnDestroy(): void {
+      this.sub.unsubscribe();
     }
 }

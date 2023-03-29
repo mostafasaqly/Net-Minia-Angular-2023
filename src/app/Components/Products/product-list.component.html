@@ -34,7 +34,8 @@
               [style.margin.px] = 'imgMargin'
               *ngIf="showImage"
               > </td>
-            <td appTextTransfrom ColorDirective="green" UpperCase="uppercase" LowerCase="lowercase">{{product.productName | uppercase}}</td>
+            <!-- <td appTextTransfrom ColorDirective="green" UpperCase="uppercase" LowerCase="lowercase">{{product.productName | uppercase}}</td> -->
+            <td><a [routerLink]="['/products', product.productID]">{{product.productName}}</a></td>
             <td>{{product.productCode | uppercase | convertToSpaces : '-'}}</td>
             <td>{{product.releaseDate | date : 'shortDate'}}</td>
             <!-- <td  [ngClass]="{'text-danger': product.price < 5000, 'class1': product.price < 5000}"
@@ -46,12 +47,7 @@
               {{product.price | currency: 'USD' : 'symbol':'1.2-2'}}
             </td>
 
-            <td [style.color] = "(product.startRating < 2.5) ? 'red' : 'green' "
-            [style.font-size] = "(product.startRating > 2.5) ? '25px' : '20px'"
-            >
-
-              {{product.startRating}}
-            </td>
+            <td> <app-star [rating]="product.startRating" (ratingClicked)="onRatingClicked($event)"></app-star> </td>
           </tr>
         </tbody>
       </table>
