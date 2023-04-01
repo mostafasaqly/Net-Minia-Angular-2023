@@ -4,12 +4,15 @@ import { HomeComponent } from './Components/home/home.component';
 import { NotFoundComponent } from './Components/not-found/not-found.component';
 import { ProductDetailComponent } from './Components/product-detail/product-detail.component';
 import { ProductListComponent } from './Components/Products/product-list.component';
+import { ProductDetailGuard } from './Guards/product-detail.guard';
+import { UserAuthGuard } from './user/Guards/user-auth.guard';
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch:'full'},
-  {path : 'home', component: HomeComponent},
-  {path: 'products', component: ProductListComponent},
-  {path: 'products/:id', component: ProductDetailComponent},
+  {path : 'home', component: HomeComponent, title: 'Home'},
+  {path: 'products', component: ProductListComponent,  canActivate: [UserAuthGuard]},
+  {path: 'products/:id', component: ProductDetailComponent, canActivate: [UserAuthGuard, ProductDetailGuard]},
+  {path: 'user', loadChildren: () => import('src/app/user/user.module').then((m)=> m.UserModule)},
   {path:"**", component:NotFoundComponent}
 ];
 

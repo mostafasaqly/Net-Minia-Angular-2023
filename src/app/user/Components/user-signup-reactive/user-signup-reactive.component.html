@@ -1,0 +1,43 @@
+
+<div class="card">
+  <div class="card-header">
+    Sign Up with Reactive
+  </div>
+  <div class="card-body">
+    <form
+      [formGroup]="userForm" >
+      <div class="form-group row mb-2">
+        <label for="firstName" class="col-md-2 col-form-label">First Name</label>
+        <div class="col-md-8">
+          <input type="text" class="form-control" id="firstName"
+          placeholder="First Name (required)"
+          name = 'firstName'
+          formControlName="firstName"
+          [ngClass]="{'is-invalid' : (userForm.get('firstName')?.touched || firstName?.dirty )
+          && !firstName?.valid }"
+          >
+          <span class ='invalid-feedback'>
+            <span *ngIf="firstName?.errors?.['required']">
+              please enter yout first name
+            </span>
+            <span *ngIf="firstName?.errors?.['minlength']">
+              the first name must be longer than 3 characters
+            </span>
+          </span>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!--
+<br> Dirty : {{userForm.dirty}}
+<br> Touched : {{userForm.touched}}
+<br> Valid : {{userForm.valid}}
+<br> Value : {{userForm.value | json}} -->
+
+
+<br> Dirty : {{firstName?.dirty}}
+<br> Touched : {{firstName?.touched}}
+<br> Valid : {{firstName?.valid}}
+<br> Value : {{firstName?.value | json}}
